@@ -7,7 +7,7 @@ class User:
         Создание и подготовка объекта "Пользователь"
         :param login: Логин
         :param mail: Почта
-        :param age: Пароль
+        :param age: Возраст
 
         Пример:
         >>> user = User("SKZ2017", "skz.2017@mail.ru", 16)
@@ -37,17 +37,18 @@ class User:
         """
         ...
 
-    def verification_age(self):
+    def add_friend(self, friend:str) -> None:
         """
-        Функция проверяет возраст пользователя
-        :param age: Возраст пользователя
-
-        :raise ValueError: Если возраст меньше 14, то возвращаем ошибку
+        Функция добавляет друга в список друзей
+        :param friend: Имя друга
+        :return: Возвращает строку 'имя друга' добавлен в друзья
 
         Пример:
         >>> user = User("SKZ2017", "skz.2017@mail.ru", 16)
-        >>> user.verification_age()
+        >>> user.add_friend("Bbokari")
         """
+        if not isinstance(friend, str):
+            raise TypeError("Имя должно быть типа str")
         ...
 
     def welcome_user(self) -> str:
