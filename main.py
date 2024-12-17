@@ -26,15 +26,18 @@ class User:
             raise ValueError("Возраст пользователя не должен быть меньше 14")
         self.age = age
 
-    def new_mail(self) -> str:
+    def set_new_mail(self, new_mail:str) -> None:
         """
         Функция создаёт новую почту
-        :return: Новая почта
+        :param new_mail: Новая почта
+        :return: Возвращает новую почту
 
         Пример:
         >>> user = User("SKZ2017", "skz.2017@mail.ru", 16)
-        >>> user.new_mail()
+        >>> user.set_new_mail("skzoo.2017@mail.ru")
         """
+        if not isinstance(new_mail, str):
+            raise TypeError("Почта должна быть типа str")
         ...
 
     def add_friend(self, friend:str) -> None:
