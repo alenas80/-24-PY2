@@ -15,6 +15,7 @@ class Feline:
     @breed.setter
     def breed(self, breed: str) -> None:
         self.__breed = breed
+    # Нельзя изменить породу кошки
 
     @property
     def size(self):
@@ -23,7 +24,7 @@ class Feline:
     @size.setter
     def size(self, size: str) -> None:
         self.__size = size
-
+    # Неизменяемая характеристика кошки(Большая кошка не может стать маленькой)
 
     def __str__(self) -> str:
         """
@@ -39,7 +40,7 @@ class Feline:
         """
         return f"{self.__class__.__name__}(breed={self.breed!r}, size={self.size!r})"
 
-    def eat(self, food_type: str, meal_size: str) -> None:
+    def eat(self, meal_size:str, food_type:str="обычная еда") -> None:
         """
         Позволяет кошке поесть в зависимости от типа еды и размера порции
         :param food_type: тип еды, которой питается кошка (например, сухой корм, мясо, рыба)
@@ -69,18 +70,18 @@ class WildCat(Feline):
     def __repr__(self):
         """
         Определяет поведение функции repr(), вызванной для экземпляра класса
-
         :return: str
         """
         return f"{self.__class__.__name__}(breed={self.breed!r}, size={self.size!r}, habitat={self.habitat!r})"
 
-    def hunting(self, type_prey: str, method: str) -> None:
+    def eat(self, meal_size:str, food_type:str="сырое мясо") -> None:
         """
-        Дикой кошке сначала надо поохотится прежде, чем поесть. Поэтому перегружаем метод из базового класса
-        :param type_prey: тип добычи
-        :param method: метод охоты(погоня, засада)
-        :return: тип добычи и как её поймали
+        Дикой кошке охотится на добычу и ест пойманную добычу. Поэтому перегружаем метод из базового класса
+        :param meal_size: размер порции (большой, средний, маленький)
+        :param food_type: тип добычи
+        :return: тип добычи и размер порции
         """
+        super().eat(food_type, meal_size)
 
 class DomesticCat(Feline):
     """
@@ -98,12 +99,14 @@ class DomesticCat(Feline):
         """
         return f"{self.__class__.__name__}(breed={self.breed!r}, size={self.size!r}, name={self.name!r})"
 
-    def ask_for_food(self, meow_duration: int) -> None:
+    def eat(self, meal_size:str, food_type:str="кошачий корм") -> None:
         """
-        Домашняя кошка просит еду, когда голодна. Поэтому перегружаем метод из базового класса
-        :param meow_duration: продолжительность мяуканья, когда кошка просит еду
-        :return: продолжительность мяуканья
+        Домашняя кошка просит еду и ест, то что даст хозяин. Поэтому перегружаем метод из базового класса
+        :param food_type: тип корма
+        :param meal_size: размер порции (большой, средний, маленький)
+        :return: тип корма и размер порции
         """
+        super().eat(food_type, meal_size)
 
 if __name__ == "__main__":
     # Write your solution here
